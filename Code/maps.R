@@ -9,7 +9,7 @@ outflow_us <- summaryBy(flow + pop_out ~ fips_out, data = outflow_us, FUN = c(su
 outflow_us$flow_share <- outflow_us$flow.sum/outflow_us$pop_out.mean
 outflow_us <- outflow_us[, c(1,6)]
 colnames(outflow_us) <- c("fips","flow_share")
-inflow_map <- merge(inflow_us, shp, by.x = "fips", by.y = "fips", all.x = TRUE, sort=FALSE) %>% st_as_sf()
+inflow_map <- merge(inflow_us, shp, by.x = "fips", by.y = "fips", all.x = TRUE, sort=FALSE) |> st_as_sf()
 outflow_map <- merge(outflow_us, shp, by.x = "fips", by.y = "fips", all.x = TRUE, sort=FALSE) %>% st_as_sf()
 
 ## Construct map datasets of RI flows
