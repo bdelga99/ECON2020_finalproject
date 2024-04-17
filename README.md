@@ -9,10 +9,14 @@
 - Downloaded annual personal income by county series from [BEA](https://apps.bea.gov/regional/downloadzip.cfm?_gl=1*1c6shsa*_ga*MTI3ODU2MTMwMy4xNzEzMTM5MDYw*_ga_J4698JNNFT*MTcxMzIzNzQ0NC40LjAuMTcxMzIzNzQ0NC42MC4wLjA); click dropdown under personal income (state and local) and select CAINC1 series
 - US county shapefile downloaded from [Census](https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html); click file called
 cb_2018_us_county_500k.zip under County section
-#### Main file
-- As long as file paths are correct, will run complete analysis and generate desired figures in output folder (note: I experienced some trouble running chunks of code together in VSCode, but it works line by line and worked in RStudio so it can't be an issue with the raw code - everything worked the last time I ran it so hopefully there's no issue, but if the main.r file is generating errors then you may need to run each line of the file individually?)
+#### Data
+- Contains all of the downloaded raw data files
+#### Codes
+- As long as file paths are correct, main.r will run complete analysis and generate desired figures in output folder (note: I experienced some trouble running chunks of code together in VSCode, but it works line by line and worked in RStudio so it can't be an issue with the raw code - everything worked the last time I ran it so hopefully there's no issue, but if the main.r file is generating errors then you may need to run each line of the file individually?)
 - processing.r reads in data files and completes preliminary cleaning
 - cleaning.r cleans and generates primary dataset
 - unit_test.r runs unit test to verify that shapefile is of the correct format
 - tables.r runs primary regression and generates table in output folder
 - maps.r generates choropleth maps for analysis
+#### Output
+- Contains table generated in tables.r and figures from maps.r
