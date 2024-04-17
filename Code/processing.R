@@ -64,6 +64,8 @@ colnames(clean_inc) <- c("fips", "inc")
 clean_inc$inc <- as.numeric(clean_inc$inc)
 
 ## Read in county coordinates data
+shp <- st_read("Data/cb_2018_us_county_500k/cb_2018_us_county_500k.shp")
+colnames(shp)[colnames(shp) == "GEOID"] <- "fips"
 get_coords <- st_read("Data/cb_2018_us_county_500k/cb_2018_us_county_500k.shp") |> st_centroid() |> as.data.frame()
 coords <- st_coordinates(get_coords$geometry) |> as.data.frame()
 coords_data <- st_read("Data/cb_2018_us_county_500k/cb_2018_us_county_500k.shp") |> as.data.frame()

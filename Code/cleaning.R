@@ -23,7 +23,8 @@ colnames(data)[colnames(data) == "scale"] <- "scale_in"
 data <- merge(data, clean_amenities, by.x = "fips_out", by.y = "fips", all.x=TRUE, sort=FALSE)
 colnames(data)[colnames(data) == "metro_adj"] <- "metro_adj_out"
 colnames(data)[colnames(data) == "scale"] <- "scale_out"
-data$metro_diff <- as.factor(as.numeric(data$metro_adj_in)-as.numeric(data$metro_adj_out))
+data$metro_diff <- factor(as.numeric(data$metro_adj_in)-as.numeric(data$metro_adj_out))
+data$metro_diff <- relevel(data$metro_diff, ref = 2)
 data$scale_diff <- data$scale_in-data$scale_out
 
 ## Merge BEA data
@@ -43,12 +44,12 @@ data$flow_share_in <- data$flow/data$pop_in
 data$flow_share_out <- data$flow/data$pop_out
 
 ## Merge long and lat data
-data <- merge(data, clean_coords, by.x = "fips_in", by.y = "fips", all.x=TRUE, sort=FALSE)
-colnames(data)[colnames(data) == "long"] <- "long_in"
-colnames(data)[colnames(data) == "lat"] <- "lat_in"
 data <- merge(data, clean_coords, by.x = "fips_out", by.y = "fips", all.x=TRUE, sort=FALSE)
 colnames(data)[colnames(data) == "long"] <- "long_out"
 colnames(data)[colnames(data) == "lat"] <- "lat_out"
+data <- merge(data, clean_coords, by.x = "fips_in", by.y = "fips", all.x=TRUE, sort=FALSE)
+colnames(data)[colnames(data) == "long"] <- "long_in"
+colnames(data)[colnames(data) == "lat"] <- "lat_in"
 
 ## Compute distance between coordinates
 data$dist <- distHaversine(cbind(data$long_in, data$lat_in), cbind(data$long_out, data$lat_out), r=6378137)
@@ -57,3 +58,8 @@ data$dist <- distHaversine(cbind(data$long_in, data$lat_in), cbind(data$long_out
 data <- data[!as.numeric(substr(data$fips_out,1,2)) > 60,]
 data <- data[substr(data$fips_out,1,2) != "02",]
 data <- data[substr(data$fips_out,1,2) != "15",]
+
+## Construct mappable datasets
+data_in <- data[]
+
+choropleth_data <- merge(data, shp, by.x = "fips_in", by.y = "fips", all.x = TRUE, sort=FALSE) %>% st_as_sf()
