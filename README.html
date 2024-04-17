@@ -65,6 +65,32 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
+<section id="file-structure" class="level3">
+<h3 class="anchored" data-anchor-id="file-structure">File structure:</h3>
+<section id="data-folder" class="level4">
+<h4 class="anchored" data-anchor-id="data-folder">Data folder</h4>
+<ul>
+<li>Contains all of the downloaded raw data files</li>
+</ul>
+</section>
+<section id="code-folder" class="level4">
+<h4 class="anchored" data-anchor-id="code-folder">Code folder</h4>
+<ul>
+<li>As long as file paths are correct, main.r will run complete analysis and generate desired figures in output folder (note: I experienced some trouble running chunks of code together in VSCode, but it works line by line and worked in RStudio so it can’t be an issue with the raw code - everything worked the last time I ran it so hopefully there’s no issue, but if the main.r file is generating errors then you may need to run each line of the file individually?)</li>
+<li>processing.r reads in data files and completes preliminary cleaning</li>
+<li>cleaning.r cleans and generates primary dataset</li>
+<li>unit_test.r runs unit test to verify that shapefile is of the correct format</li>
+<li>tables.r runs primary regression and generates table in output folder</li>
+<li>maps.r generates choropleth maps for analysis</li>
+</ul>
+</section>
+<section id="output-folder" class="level4">
+<h4 class="anchored" data-anchor-id="output-folder">Output folder</h4>
+<ul>
+<li>Contains table generated in tables.r and figures from maps.r</li>
+</ul>
+</section>
+</section>
 </section>
 
 </main>
