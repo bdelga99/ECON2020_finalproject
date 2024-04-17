@@ -55,11 +55,9 @@ colnames(data)[colnames(data) == "lat"] <- "lat_in"
 data$dist <- distHaversine(cbind(data$long_in, data$lat_in), cbind(data$long_out, data$lat_out), r=6378137)
 
 ## Exclude non-contiguous US
+data <- data[!as.numeric(substr(data$fips_in,1,2)) > 60,]
+data <- data[substr(data$fips_in,1,2) != "02",]
+data <- data[substr(data$fips_in,1,2) != "15",]
 data <- data[!as.numeric(substr(data$fips_out,1,2)) > 60,]
 data <- data[substr(data$fips_out,1,2) != "02",]
 data <- data[substr(data$fips_out,1,2) != "15",]
-
-## Construct mappable datasets
-data_in <- data[]
-
-choropleth_data <- merge(data, shp, by.x = "fips_in", by.y = "fips", all.x = TRUE, sort=FALSE) %>% st_as_sf()
